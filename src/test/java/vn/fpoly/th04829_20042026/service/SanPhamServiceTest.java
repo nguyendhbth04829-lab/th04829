@@ -35,7 +35,7 @@ SanPhamService sanPhamService;
         void updateSanPhamThatBaiVoiTenKhongHopLe(){
         SanPham sanPham = new SanPham("sp4","Ma",2020,50000,8,"Da dung");
         sanPhamService.addSanPham(sanPham);
-        Exception exception = assertThrows(IllegalArgumentException.class,()->sanPhamService.updateSanPham(new SanPham("sp3","",2020,50000,9,"Da dung")));
+        Exception exception = assertThrows(IllegalArgumentException.class,()->sanPhamService.updateSanPham(new SanPham("sp4","",2020,50000,9,"Da dung")));
         assertEquals("Ten khong hop le",exception.getMessage());
         }
 
@@ -63,5 +63,25 @@ SanPhamService sanPhamService;
             Exception exception = assertThrows(IllegalArgumentException.class,()->sanPhamService.updateSanPham(null));
             assertEquals("San pham null",exception.getMessage());
         }
+
+        @Test
+    @DisplayName("Luong chinh add")
+    void addSanPhamThanhCong(){
+            SanPham sanPham = new SanPham("sp7","Ma",2020,50000,8,"Da dung");
+            sanPhamService.addSanPham(sanPham);
+            SanPham sanPham2 = new SanPham("sp8","Mao",2020,50000,8,"Da dung");
+            sanPhamService.addSanPham(sanPham2);
+      assertEquals(2,sanPhamService.getAll().size());
+
+        }
+
+        @Test
+    void addSanPhamVoiIdDaTonTai(){
+            SanPham sanPham = new SanPham("sp9","Ma",2020,50000,8,"Da dung");
+            sanPhamService.addSanPham(sanPham);
+            Exception exception = assertThrows(IllegalArgumentException.class,()->sanPhamService.addSanPham(new SanPham("sp9","Ma",2020,50000,8,"Da dung")));
+            assertEquals("Id da ton tai, khong the add",exception.getMessage());
+        }
+
 
     }

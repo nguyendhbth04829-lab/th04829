@@ -11,6 +11,11 @@ public class SanPhamService {
         if (sanPham==null){
             throw new IllegalArgumentException("San pham null");
         }
+        for (int i = 0; i<sanPhams.size();i++){
+            if(sanPhams.get(i).getMa()==sanPham.getMa()){
+                throw new IllegalArgumentException("Id da ton tai, khong the add");
+            }
+        }
         sanPhams.add(sanPham);
     }
     public void updateSanPham(SanPham sanPham){
@@ -31,6 +36,7 @@ public class SanPhamService {
             if (sanPham.getMa().equals(ma)){
                 return  sanPham;
             }
+
         }
         return null;
     }
